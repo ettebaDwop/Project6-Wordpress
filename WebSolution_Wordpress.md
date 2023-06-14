@@ -41,9 +41,18 @@ The next step is to install the "lwm2" package and check for available partition
 
 `sudo yum install lvm2`  &&  `sudo lvmdiskscan`
 
+Use pvcreate utility to mark each of 3 disks as physical volumes (PVs) to be used by LVM
 
+```
+sudo pvcreate /dev/xvdf1
+sudo pvcreate /dev/xvdg1
+sudo pvcreate /dev/xvdh1
+```
 
 `sudo pvs`   # to check if physical volumes have been created and running successfully
+
+![Screenshot (291)](https://github.com/ettebaDwop/Project6-Wordpress/assets/7973831/e9e96965-8c36-4887-a64e-1379a2e79975)
+
 
 
 
