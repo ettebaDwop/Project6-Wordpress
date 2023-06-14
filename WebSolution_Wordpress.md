@@ -148,13 +148,40 @@ To verify set up run the command:
 ![Screenshot (313)](https://github.com/ettebaDwop/Project6-Wordpress/assets/7973831/bfa79c1c-3866-4e0c-8c6c-b1f3e6cd487e)
 
 ### Part 2 - Prepare the Database Server
+Run codes as before . This time craete a /db file
+
+
+
+### Install Word Press
+Update the repository
+
+sudo yum -y update
+
+Install wget, Apache and it’s dependencies
+
+sudo yum -y install wget httpd php php-mysqlnd php-fpm php-json
+
+Start Apache
+
+sudo systemctl enable httpd
+sudo systemctl start httpd
+To install PHP and it’s depemdencies
+
+```
+sudo yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
+sudo yum install -y dnf-utils http://rpms.remirepo.net/enterprise/remi-release-9.rpm
+sudo yum module list php
+sudo yum module reset php
+sudo yum module enable php:remi-7.4
+sudo yum install php php-opcache php-gd php-curl php-mysqlnd
+*failed here*
 
 sudo yum remove php-8.0.27-1.el9_1.x86_64 php-opcache-8.0.27-1.el9_1.x86_64 php-common-8.0.27-1.el9_1.x86_64 php-mysqlnd-8.0.27-1.el9_1.x86_64
-   81  sudo yum install php php-opcache php-gd php-curl php-mysqlnd --allowerasing
-   82  sudo systemctl start php-fpm
-   83  sudo systemctl enable php-fpm
-   84  sudo setsebool -P httpd_execmem 1
-
+sudo yum install php php-opcache php-gd php-curl php-mysqlnd --allowerasing
+sudo systemctl start php-fpm
+sudo systemctl enable php-fpm
+sudo setsebool -P httpd_execmem 1
+```
 
 
 
