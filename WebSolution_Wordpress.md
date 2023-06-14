@@ -18,6 +18,8 @@ server.
 
 #### Step 2 - Connect on PowerShell
 •	Copy  SSH key from AWS EC2 instance
-•	Run the following commands
-o	Lsblk
+•	Run the following commands:
 
+' Lsblk'
+
+![Screenshot (284)](https://github.com/ettebaDwop/Project6-Wordpress/assets/7973831/782c2810-65a8-42fd-92af-449342726248)
