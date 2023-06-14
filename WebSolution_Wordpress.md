@@ -48,8 +48,11 @@ sudo pvcreate /dev/xvdf1
 sudo pvcreate /dev/xvdg1
 sudo pvcreate /dev/xvdh1
 ```
+![Screenshot (293)](https://github.com/ettebaDwop/Project6-Wordpress/assets/7973831/03675165-59b9-4a78-80f8-932d8e679f54)
 
 `sudo pvs`   # to check if physical volumes have been created and running successfully
+
+
 
 ![Screenshot (291)](https://github.com/ettebaDwop/Project6-Wordpress/assets/7973831/e9e96965-8c36-4887-a64e-1379a2e79975)
 
