@@ -149,7 +149,11 @@ To verify set up run the command:
 
 ### Part 2 - Prepare the Database Server
 
-
+sudo yum remove php-8.0.27-1.el9_1.x86_64 php-opcache-8.0.27-1.el9_1.x86_64 php-common-8.0.27-1.el9_1.x86_64 php-mysqlnd-8.0.27-1.el9_1.x86_64
+   81  sudo yum install php php-opcache php-gd php-curl php-mysqlnd --allowerasing
+   82  sudo systemctl start php-fpm
+   83  sudo systemctl enable php-fpm
+   84  sudo setsebool -P httpd_execmem 1
 
 
 
