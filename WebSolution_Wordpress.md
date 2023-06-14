@@ -4,7 +4,7 @@
 
 ### Implementation
 
-####  Step 1 — Prepare a Web Server
+###  Part 1 — Prepare a Web Server
 Open your PC browser and login to https://aws.amazon.com/ 
  
 • A region is selected by default (change if necessary), from the search bar type EC2 and 
@@ -61,27 +61,37 @@ Use vgcreate utility to add all 3 PVs to a volume group (VG). Name the VG webdat
 
 `sudo vgcreate webdata-vg /dev/xvdh1 /dev/xvdg1 /dev/xvdf1`
 
+![Screenshot (303)](https://github.com/ettebaDwop/Project6-Wordpress/assets/7973831/0c68e40d-8d5f-4fe4-96b4-0f2037e9c8f0)
+
 *Create 2 logical volumes. apps-lv (Use half of the PV size), and logs-lv Use the remaining space of the PV size. NOTE: apps-lv will be used to store data for the Website while, logs-lv will be used to store data for logs
 
 ```
 sudo lvcreate -n apps-lv -L 14G webdata-vg
 sudo lvcreate -n logs-lv -L 14G webdata-vg
 ```
+![Screenshot (305)](https://github.com/ettebaDwop/Project6-Wordpress/assets/7973831/6ad90b76-3e76-4c77-b7c1-63eb6d5a6867)
 
 Verify that your Logical Volume has been created successfully by running: 
 
 `sudo lvs`
 
+![Screenshot (306)](https://github.com/ettebaDwop/Project6-Wordpress/assets/7973831/12f4b7f1-daae-494f-abc0-fff6fccd5ac3)
+
 Verify the enture setup
 ```
-sudo vgdisplay -v #view complete setup - VG, PV, and LV
+sudo vgdisplay -v  #view complete setup - VG, PV, and LV
 sudo lsblk
 ```
+![Screenshot (307)](https://github.com/ettebaDwop/Project6-Wordpress/assets/7973831/0e40963f-cef4-4558-bfed-0307ed48bd5f)
+
 Use mkfs.ext4 to format the logical volumes with ext4 filesystem
+
 ```
 sudo mkfs -t ext4 /dev/webdata-vg/apps-lv
 sudo mkfs -t ext4 /dev/webdata-vg/logs-lv
 ```
+![Screenshot (302)](https://github.com/ettebaDwop/Project6-Wordpress/assets/7973831/7fd3b1e5-8e7c-41d9-b5ac-25bd2b0d990c)
+
 Create /var/www/html directory to store website files
 
 `sudo mkdir -p /var/www/html`
@@ -98,6 +108,8 @@ Use rsync utility to backup all the files in the log directory /var/log into /ho
 
 `sudo rsync -av /var/log/. /home/recovery/logs/`
 
+![Screenshot (304)](https://github.com/ettebaDwop/Project6-Wordpress/assets/7973831/80ed5960-a6e2-4158-a2dd-4170146e35c3)
+
 Mount /var/log on logs-lv logical volume. (Note that all the existing data on /var/log will be deleted. That is why step 15 above is very
 important)
 
@@ -109,12 +121,29 @@ Restore log files back into /var/log directory
 
 Next thing to do is to update /etc/fstab file so that the mount configuration will persist after restart of the server.
 
-### Update  /etc/fstab file
-- Run commands:
+#### Update  /etc/fstab file
+To update the file, run the following commands:
 ```
 sudo blkid
 sudo vi /etc/fstab
 ```
+
+Test the configuration and reload the daemon by running the command:
+
+```
+sudo mount -a
+sudo systemctl daemon-reload
+```
+
+To verify set up run the command:
+
+`df -h`
+
+
+### Part 2 - Prepare the Database Server
+
+
+
 
 
 
