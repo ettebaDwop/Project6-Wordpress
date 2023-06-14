@@ -20,6 +20,22 @@ server.
 •	Copy  SSH key from AWS EC2 instance
 •	Run the following commands:
 
-' Lsblk'
+` Lsblk` 
 
 ![Screenshot (284)](https://github.com/ettebaDwop/Project6-Wordpress/assets/7973831/782c2810-65a8-42fd-92af-449342726248)
+
+`df -h`    # to check for  see free space and see all mounts on server
+
+
+`sudo gdisk /dev/xvdf` 
+
+`sudo gdisk /dev/xvdg`
+
+`sudo gdisk /dev/xvdh`     # to create a single partition on each of the 3 disks
+
+To check partition created run   `lsblk`
+
+
+
+
+
