@@ -33,9 +33,17 @@ server.
 
 `sudo gdisk /dev/xvdh`     # to create a single partition on each of the 3 disks
 
-To check partition created run   `lsblk`
+To check partition created run    `lsblk`
+
+![Screenshot (289)](https://github.com/ettebaDwop/Project6-Wordpress/assets/7973831/298682e8-dea2-42a5-b9a2-b9d3580a5207)
+
+The next step is to install the "lwm2" package and check for available partitions.
+
+`sudo yum install lvm2`  &&  `sudo lvmdiskscan`
 
 
+
+`sudo pvs`   # to check if physical volumes have been created and running successfully
 
 
 
