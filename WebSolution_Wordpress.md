@@ -41,6 +41,8 @@ The next step is to install the "lwm2" package and check for available partition
 
 `sudo yum install lvm2`  &&  `sudo lvmdiskscan`
 
+![Screenshot (291)](https://github.com/ettebaDwop/Project6-Wordpress/assets/7973831/e9e96965-8c36-4887-a64e-1379a2e79975)
+
 Use pvcreate utility to mark each of 3 disks as physical volumes (PVs) to be used by LVM
 
 ```
@@ -48,13 +50,72 @@ sudo pvcreate /dev/xvdf1
 sudo pvcreate /dev/xvdg1
 sudo pvcreate /dev/xvdh1
 ```
+
 ![Screenshot (293)](https://github.com/ettebaDwop/Project6-Wordpress/assets/7973831/03675165-59b9-4a78-80f8-932d8e679f54)
 
 `sudo pvs`   # to check if physical volumes have been created and running successfully
 
+![Screenshot (295)](https://github.com/ettebaDwop/Project6-Wordpress/assets/7973831/a4206ccd-2669-44d0-9f64-de407e5c1802)
 
+Use vgcreate utility to add all 3 PVs to a volume group (VG). Name the VG webdata-vg
 
-![Screenshot (291)](https://github.com/ettebaDwop/Project6-Wordpress/assets/7973831/e9e96965-8c36-4887-a64e-1379a2e79975)
+`sudo vgcreate webdata-vg /dev/xvdh1 /dev/xvdg1 /dev/xvdf1`
+
+*Create 2 logical volumes. apps-lv (Use half of the PV size), and logs-lv Use the remaining space of the PV size. NOTE: apps-lv will be used to store data for the Website while, logs-lv will be used to store data for logs
+
+```
+sudo lvcreate -n apps-lv -L 14G webdata-vg
+sudo lvcreate -n logs-lv -L 14G webdata-vg
+```
+
+Verify that your Logical Volume has been created successfully by running: 
+
+`sudo lvs`
+
+Verify the enture setup
+```
+sudo vgdisplay -v #view complete setup - VG, PV, and LV
+sudo lsblk
+```
+Use mkfs.ext4 to format the logical volumes with ext4 filesystem
+```
+sudo mkfs -t ext4 /dev/webdata-vg/apps-lv
+sudo mkfs -t ext4 /dev/webdata-vg/logs-lv
+```
+Create /var/www/html directory to store website files
+
+`sudo mkdir -p /var/www/html`
+
+Create /home/recovery/logs to store backup of log data
+
+`sudo mkdir -p /home/recovery/logs`
+
+Mount /var/www/html on apps-lv logical volume
+
+`sudo mount /dev/webdata-vg/apps-lv /var/www/html/`
+
+Use rsync utility to backup all the files in the log directory /var/log into /home/recovery/logs (This is required before mounting the file system)
+
+`sudo rsync -av /var/log/. /home/recovery/logs/`
+
+Mount /var/log on logs-lv logical volume. (Note that all the existing data on /var/log will be deleted. That is why step 15 above is very
+important)
+
+`sudo mount /dev/webdata-vg/logs-lv /var/log`
+
+Restore log files back into /var/log directory
+
+`sudo rsync -av /home/recovery/logs/. /var/log`
+
+Next thing to do is to update /etc/fstab file so that the mount configuration will persist after restart of the server.
+
+### Update  /etc/fstab file
+- Run commands:
+```
+sudo blkid
+sudo vi /etc/fstab
+```
+
 
 
 
