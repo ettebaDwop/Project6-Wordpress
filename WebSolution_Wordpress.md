@@ -127,18 +127,25 @@ To update the file, run the following commands:
 sudo blkid
 sudo vi /etc/fstab
 ```
+![Screenshot (310)](https://github.com/ettebaDwop/Project6-Wordpress/assets/7973831/93a55c4b-e758-43ae-90e7-864df7f32f19)
+
+Open the *fstab* file and make the following changes:
+
+![Screenshot (311)](https://github.com/ettebaDwop/Project6-Wordpress/assets/7973831/fde6bf52-e903-43dd-9ab1-8a02d8668856)
+
 
 Test the configuration and reload the daemon by running the command:
 
 ```
-sudo mount -a
-sudo systemctl daemon-reload
+    sudo mount -a
+    sudo systemctl daemon-reload
 ```
 
 To verify set up run the command:
 
 `df -h`
 
+![Screenshot (313)](https://github.com/ettebaDwop/Project6-Wordpress/assets/7973831/bfa79c1c-3866-4e0c-8c6c-b1f3e6cd487e)
 
 ### Part 2 - Prepare the Database Server
 
