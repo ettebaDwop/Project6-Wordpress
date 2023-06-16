@@ -1,4 +1,4 @@
- # Web Solution With WordPress
+sudo systemctl start mysqld # Web Solution With WordPress
 
 ### Prerequisites
 
@@ -190,4 +190,39 @@ install mysql -server in var/www/html
 start MYQSL server on the webserver as well.
 
 `sudo systemctl start mysqld`
+`sudo systemctl enable mysqld`
+
+mysql> CREATE USER 'wordpress'@'%' IDENTIFIED WITH mysql_native_password BY 'mypass';
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> GRANT ALL PRIVILEGES ON *.* TO 'wordpress'@'%' WITH GRANT OPTION;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> FLUSH PRIVILEGES;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> select user, host from mysql.user
+
+wordpress server
+edist file
+sudo vi wp-config.php
+
+Data base server
+Edit the configuration file
+
+`sudo vi /etc/my.cnf`
+
+after editing the configuration file
+
+`sudo systemctl restart mysqld`
+
+sudo vi wp-config.php
+sudo systemctl restart httpd
+
+
+Disable default page of Apache
+sudo mv /etc/httpd/conf.d/welcome.conf  /etc/httpd/conf.d/welcome.conf_backup
+
+
+to confirm that ds and web can talk 
 
