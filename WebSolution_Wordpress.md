@@ -184,8 +184,10 @@ sudo systemctl start php-fpm
 sudo systemctl enable php-fpm
 sudo setsebool -P httpd_execmem 1
 ```
+install mysql -server in var/www/html
+`sudo yum install mysql-server`
 
+start MYQSL server on the webserver as well.
 
-
-
+`sudo systemctl start mysqld`
 
