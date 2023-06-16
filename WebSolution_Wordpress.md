@@ -155,16 +155,18 @@ Run codes as before . This time craete a /db file
 ### Install Word Press
 Update the repository
 
-sudo yum -y update
+`sudo yum -y update`
 
 Install wget, Apache and it’s dependencies
 
-sudo yum -y install wget httpd php php-mysqlnd php-fpm php-json
+`sudo yum -y install wget httpd php php-mysqlnd php-fpm php-json`
 
 Start Apache
 
+```
 sudo systemctl enable httpd
 sudo systemctl start httpd
+```
 To install PHP and it’s depemdencies
 
 ```
