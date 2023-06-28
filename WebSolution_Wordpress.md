@@ -278,9 +278,7 @@ Disable default page of Apache, run:
 `sudo mv /etc/httpd/conf.d/welcome.conf  /etc/httpd/conf.d/welcome.conf_backup` #Creating a backup copy instead of disabling the page.
 
 
-Hint: Do not forget to open MySQL port 3306 on DB Server EC2. For extra security, allow access to the DB server ONLY from the Web Server’s IP address, so in the Inbound Rule configuration specify source as /32
-
-
+* Open MySQL port 3306 on DB Server EC2. For extra security, allow access to the DB server ONLY from the Web Server’s IP address, so in the Inbound Rule configuration specify source as /32
 
 
 Install MySQL client and test that you can connect from your Web Server to your DB server by using mysql-client
@@ -293,7 +291,7 @@ Verify if you can successfully execute `SHOW DATABASES;`  command and see a list
 
 * Change permissions and configuration so Apache could use WordPress:
 
-Enable TCP port 80 in Inbound Rules configuration for your Web Server EC2 (enable from everywhere 0.0.0.0/0 or from your workstation’s IP)
+  - Enable TCP port 80 in Inbound Rules configuration for your Web Server EC2 (enable from everywhere 0.0.0.0/0 or from your workstation’s IP)
 
 Try to access from your browser the link to your WordPress http://<Web-Server-Public-IP-Address>/wordpress/
 ![Screenshot (370)](https://github.com/ettebaDwop/Project6-Wordpress/assets/7973831/c298d0af-637e-4e0c-82e3-8c1d4723c480)
