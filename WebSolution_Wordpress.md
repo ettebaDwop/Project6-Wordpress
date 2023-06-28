@@ -273,7 +273,7 @@ After editing the configuration file, restart mysql server:
 
 Disable default page of Apache, run:
 
-`sudo mv /etc/httpd/conf.d/welcome.conf  /etc/httpd/conf.d/welcome.conf_backup`
+`sudo mv /etc/httpd/conf.d/welcome.conf  /etc/httpd/conf.d/welcome.conf_backup` #Creating a backup copy instead of disabling the page.
 
 
 to confirm that the database and Website can talk, run:
