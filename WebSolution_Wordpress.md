@@ -9,11 +9,11 @@ This project is made up of two parts:
 ### Set up
 The 3-Tier Setup
 
-a. A Laptop or PC to serve as a client
+1. A Laptop or PC to serve as a client
 
-b. An EC2 Linux Server as a web server (WordPress installed here)
+2. An EC2 Linux Server as a web server (WordPress installed here)
 
-c. An EC2 Linux server as a database (DB) server
+3.  An EC2 Linux server as a database (DB) server
 
 
 ### Implementation
@@ -21,11 +21,7 @@ c. An EC2 Linux server as a database (DB) server
 ###  Part 1 — Prepare a Web Server
 Open your PC browser and login to https://aws.amazon.com/ 
  
-• A region is selected by default (change if necessary), from the search bar type EC2 and 
-click. 
- 
-• From the EC2 dashboard, click on the button “Launch instance” to start using a virtual 
-server. 
+•  From the EC2 dashboard, Launch instance to start using a virtual server. 
 •	Create 2 EC2 instances
 •	Create 3 volumes and mount these on the Web Server EC2 instance  
 
@@ -35,11 +31,11 @@ server.
 •	Copy  SSH key from AWS EC2 instance
 •	Run the following commands:
 
-` Lsblk` 
+`lsblk` 
 
 ![Screenshot (284)](https://github.com/ettebaDwop/Project6-Wordpress/assets/7973831/782c2810-65a8-42fd-92af-449342726248)
 
-`df -h`    # to check for  see free space and see all mounts on server
+`df -h`    # to check for free space and see all mounts on server
 
 
 `sudo gdisk /dev/xvdf` 
