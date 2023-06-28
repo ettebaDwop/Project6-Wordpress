@@ -153,21 +153,22 @@ Run codes as before . This time craete a /db file
 
 
 ### Install Word Press
-Update the repository
+* Update the repository
 
 `sudo yum -y update`
 
-Install wget, Apache and it’s dependencies
+* Install wget, Apache and it’s dependencies
 
 `sudo yum -y install wget httpd php php-mysqlnd php-fpm php-json`
 
-Start Apache
+* Start Apache
 
 ```
 sudo systemctl enable httpd
 sudo systemctl start httpd
 ```
-To install PHP and it’s depemdencies
+
+* Install PHP and it’s depemdencies
 
 ```
 sudo yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
@@ -176,6 +177,7 @@ sudo yum module list php
 sudo yum module reset php
 sudo yum module enable php:remi-7.4
 sudo yum install php php-opcache php-gd php-curl php-mysqlnd
+```
 
 * There was an error here due to the existence of multiple/conflicting php  package versions. Thus, the application failed here. To correct this I ran the following commands:
 
@@ -183,24 +185,24 @@ sudo yum install php php-opcache php-gd php-curl php-mysqlnd
 sudo yum remove php-8.0.27-1.el9_1.x86_64 php-opcache-8.0.27-1.el9_1.x86_64 php-common-8.0.27-1.el9_1.x86_64 php-mysqlnd-8.0.27-1.el9_1.x86_64
 sudo yum install php php-opcache php-gd php-curl php-mysqlnd --allowerasing
 ```
-- I restarted and enbled php
+* Restart and enbled php
 
 ```
 sudo systemctl start php-fpm
 sudo systemctl enable php-fpm
 sudo setsebool -P httpd_execmem 1
 ```
-The next step wa to install mysql -server in var/www/html
+* Install mysql -server in var/www/html
 
 `sudo yum install mysql-server`
 
-Start MYQSL server on the webserver as well.
+* Start MYQSL server on the webserver as well.
 
 ```
 sudo systemctl start mysqld
 sudo systemctl enable mysqld
 ```
-- Create a user
+* Create a user
  
 ```
 mysql> CREATE USER 'wordpress'@'%' IDENTIFIED WITH mysql_native_password BY 'mypass';
