@@ -1,6 +1,20 @@
-sudo systemctl start mysqld # Web Solution With WordPress
+# Web Solution With WordPress
+In this project we will try to run 
+This project is made up of two parts:
 
-### Prerequisites
+1. Configure storage subsystem for Web and Database servers based on Linux OS. The focus of this part is to give you practical experience of working with disks, partitions and volumes in Linux.
+
+2. Install WordPress and connect it to a remote MySQL database server. This part of the project will solidify your skills of deploying Web and DB tiers of Web solution.
+   
+### Set up
+The 3-Tier Setup
+
+a. A Laptop or PC to serve as a client
+
+b. An EC2 Linux Server as a web server (WordPress installed here)
+
+c. An EC2 Linux server as a database (DB) server
+
 
 ### Implementation
 
@@ -15,6 +29,7 @@ server.
 •	Create 2 EC2 instances
 •	Create 3 volumes and mount these on the Web Server EC2 instance  
 
+![Screenshot (366)](https://github.com/ettebaDwop/Project6-Wordpress/assets/7973831/95df2376-78fc-4976-85a0-a462435511eb)
 
 #### Step 2 - Connect on PowerShell
 •	Copy  SSH key from AWS EC2 instance
@@ -134,16 +149,13 @@ Open the *fstab* file and make the following changes:
 ![Screenshot (311)](https://github.com/ettebaDwop/Project6-Wordpress/assets/7973831/fde6bf52-e903-43dd-9ab1-8a02d8668856)
 
 
-Test the configuration and reload the daemon by running the command:
+Test the configuration, reload the daemon and verify the setup and by running the command:
 
 ```
     sudo mount -a
     sudo systemctl daemon-reload
+    df -h
 ```
-
-To verify set up run the command:
-
-`df -h`
 
 ![Screenshot (313)](https://github.com/ettebaDwop/Project6-Wordpress/assets/7973831/bfa79c1c-3866-4e0c-8c6c-b1f3e6cd487e)
 
