@@ -296,10 +296,12 @@ Change permissions and configuration so Apache could use WordPress:
 Enable TCP port 80 in Inbound Rules configuration for your Web Server EC2 (enable from everywhere 0.0.0.0/0 or from your workstation’s IP)
 
 Try to access from your browser the link to your WordPress http://<Web-Server-Public-IP-Address>/wordpress/
-
-
+![Screenshot (370)](https://github.com/ettebaDwop/Project6-Wordpress/assets/7973831/c298d0af-637e-4e0c-82e3-8c1d4723c480)
 
 Fill out your DB credentials:
+
+![Screenshot (371)](https://github.com/ettebaDwop/Project6-Wordpress/assets/7973831/d7f92783-6650-49f1-abe6-7fb9c5035d33)
+
 
 
 
