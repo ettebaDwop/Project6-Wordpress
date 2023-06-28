@@ -22,13 +22,16 @@ The 3-Tier Setup
 Open your PC browser and login to https://aws.amazon.com/ 
  
 •  From the EC2 dashboard, Launch instance to start using a virtual server. 
+
 •	Create 2 EC2 instances
+
 •	Create 3 volumes and mount these on the Web Server EC2 instance  
 
 ![Screenshot (366)](https://github.com/ettebaDwop/Project6-Wordpress/assets/7973831/95df2376-78fc-4976-85a0-a462435511eb)
 
 #### Step 2 - Connect on PowerShell
 •	Copy  SSH key from AWS EC2 instance
+
 •	Run the following commands:
 
 `lsblk` 
@@ -156,11 +159,11 @@ Test the configuration, reload the daemon and verify the setup and by running th
 ![Screenshot (313)](https://github.com/ettebaDwop/Project6-Wordpress/assets/7973831/bfa79c1c-3866-4e0c-8c6c-b1f3e6cd487e)
 
 ### Part 2 - Prepare the Database Server
-Run codes as before . This time craete a /db file
+Run codes as before in Part 1, Step 2 . This time create a /db file
 
 
+### Part 3 Install Word Press on the Webserver EC2 instance
 
-### Install Word Press
 * Update the repository
 
 `sudo yum -y update`
@@ -176,7 +179,7 @@ sudo systemctl enable httpd
 sudo systemctl start httpd
 ```
 
-* Install PHP and it’s depemdencies
+### Install PHP and it’s depemdencies
 
 ```
 sudo yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
@@ -200,6 +203,31 @@ sudo systemctl start php-fpm
 sudo systemctl enable php-fpm
 sudo setsebool -P httpd_execmem 1
 ```
+
+### Restart Apache
+  
+  `sudo systemctl restart httpd`
+
+### Download wordpress and copy wordpress to var/www/html
+
+```
+  mkdir wordpress
+  cd   wordpress
+  sudo wget http://wordpress.org/latest.tar.gz
+  sudo tar xzvf latest.tar.gz
+  sudo rm -rf latest.tar.gz
+  cp wordpress/wp-config-sample.php wordpress/wp-config.php
+  cp -R wordpress /var/www/html/
+  ```
+### Configure SELinux Policies
+
+```
+  sudo chown -R apache:apache /var/www/html/wordpress
+  sudo chcon -t httpd_sys_rw_content_t /var/www/html/wordpress -R
+  sudo setsebool -P httpd_can_network_connect=1
+```
+
+  
 * Install mysql -server in var/www/html
 
 `sudo yum install mysql-server`
@@ -210,19 +238,24 @@ sudo setsebool -P httpd_execmem 1
 sudo systemctl start mysqld
 sudo systemctl enable mysqld
 ```
-* Create a user
+### Configure DB to work with WordPress
  
 ```
-mysql> CREATE USER 'wordpress'@'%' IDENTIFIED WITH mysql_native_password BY 'mypass';
-mysql> GRANT ALL PRIVILEGES ON *.* TO 'wordpress'@'%' WITH GRANT OPTION;`
-mysql> FLUSH PRIVILEGES;
+sudo mysql
+CREATE DATABASE wordpress;
+CREATE USER 'wordpress'@'%' IDENTIFIED WITH mysql_native_password BY 'mypass';
+GRANT ALL PRIVILEGES ON *.* TO 'wordpress'@'%' WITH GRANT OPTION;`
+FLUSH PRIVILEGES;
+SHOW DATABASES;
+exit
 ```
 
 * Check to see the exsisting users
 
 `mysql> select user, host from mysql.user`
 
-On the Wordpress server, edit file the configyration file:
+### Configure WordPress to connect to remote database.
+On the Wordpress server, edit the configuration file:
 
 `sudo vi wp-config.php`
 
