@@ -176,53 +176,63 @@ sudo yum module list php
 sudo yum module reset php
 sudo yum module enable php:remi-7.4
 sudo yum install php php-opcache php-gd php-curl php-mysqlnd
-*failed here*
 
+* There was an error here due to the existence of multiple/conflicting php  package versions. Thus, the application failed here. To correct this I ran the following commands:
+
+```
 sudo yum remove php-8.0.27-1.el9_1.x86_64 php-opcache-8.0.27-1.el9_1.x86_64 php-common-8.0.27-1.el9_1.x86_64 php-mysqlnd-8.0.27-1.el9_1.x86_64
 sudo yum install php php-opcache php-gd php-curl php-mysqlnd --allowerasing
+```
+- I restarted and enbled php
+
+```
 sudo systemctl start php-fpm
 sudo systemctl enable php-fpm
 sudo setsebool -P httpd_execmem 1
 ```
-install mysql -server in var/www/html
+The next step wa to install mysql -server in var/www/html
+
 `sudo yum install mysql-server`
 
-start MYQSL server on the webserver as well.
+Start MYQSL server on the webserver as well.
 
-`sudo systemctl start mysqld`
-`sudo systemctl enable mysqld`
-
+```
+sudo systemctl start mysqld
+sudo systemctl enable mysqld
+```
+- Create a user
+ 
+```
 mysql> CREATE USER 'wordpress'@'%' IDENTIFIED WITH mysql_native_password BY 'mypass';
-Query OK, 0 rows affected (0.03 sec)
-
-mysql> GRANT ALL PRIVILEGES ON *.* TO 'wordpress'@'%' WITH GRANT OPTION;
-Query OK, 0 rows affected (0.00 sec)
-
+mysql> GRANT ALL PRIVILEGES ON *.* TO 'wordpress'@'%' WITH GRANT OPTION;`
 mysql> FLUSH PRIVILEGES;
-Query OK, 0 rows affected (0.01 sec)
+```
 
-mysql> select user, host from mysql.user
+* Check to see the exsisting users
 
-wordpress server
-edist file
-sudo vi wp-config.php
+`mysql> select user, host from mysql.user`
 
-Data base server
-Edit the configuration file
+On the Wordpress server, edit file the configyration file:
+
+`sudo vi wp-config.php`
+
+On the Data base server, edit the configuration file by running:
 
 `sudo vi /etc/my.cnf`
 
-after editing the configuration file
+After editing the configuration file, restart mysql server:
 
 `sudo systemctl restart mysqld`
 
-sudo vi wp-config.php
-sudo systemctl restart httpd
+`sudo vi wp-config.php`
+`sudo systemctl restart httpd`
 
 
-Disable default page of Apache
-sudo mv /etc/httpd/conf.d/welcome.conf  /etc/httpd/conf.d/welcome.conf_backup
+Disable default page of Apache, run:
+
+`sudo mv /etc/httpd/conf.d/welcome.conf  /etc/httpd/conf.d/welcome.conf_backup`
 
 
-to confirm that ds and web can talk 
+to confirm that the database and Website can talk, run:
+
 
