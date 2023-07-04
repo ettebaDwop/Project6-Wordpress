@@ -1,6 +1,7 @@
 # Web Solution With WordPress
-In this project we will try to run 
-This project is made up of two parts:
+In this project we will try to implement a WordPress based solution that can be filled with content and used as blog or a full fledged website. 
+
+The project is made up of two parts:
 
 1. Configure storage subsystem for Web and Database servers based on Linux OS. The focus of this part is to give you practical experience of working with disks, partitions and volumes in Linux.
 
